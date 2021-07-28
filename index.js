@@ -28,7 +28,7 @@ const employeeOpt = () => {
 
     .then((answer) => {
       switch (answer.aTeam) {
-        case "add department":
+        case "Add Department":
           return addDept();
         case "add role":
           return addRole();
@@ -46,46 +46,45 @@ const employeeOpt = () => {
     });
 };
 
-//question asked then connected through query to insert to db
 const addDept = () => {
   inquirer
     .prompt({
       name: "addDept",
       type: "input",
-      message: "Enter a new department",
+      message: "Add a new department",
     })
     .then((answer) => {
       connection.query(
         "INSERT INTO departments SET ?",
         {
-          name: answer.newDept,
+          name: answer.addDept,
         },
         (err) => {
           if (err) throw err;
-          console.log("Your department has been created!");
+          console.log("Your department was added!");
           employeeOpt();
         }
       );
     });
 };
-////////////////////////////////////////////////////////
+
 const addRole = () => {
   inquirer
     .prompt([
       {
         name: "newRole",
         type: "input",
-        message: "Enter new role title",
+        message: "Add a new role.",
       },
       {
         name: "salary",
         type: "input",
-        message: "Enter Salary",
+        message: "Add salary for new role.",
       },
       {
         name: "deptid",
         type: "input",
-        message: "What department ID does this employee belong to? ",
+        message: "Add a department ID to this role. ",
       },
     ])
     .then((answer) => {
@@ -98,13 +97,12 @@ const addRole = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log("Your role was created successfully!");
+          console.log("The new role was added!");
           employeeOpt();
         }
       );
     });
 };
-///////////////////////////;
 
 const addEmp = () => {
   inquirer
@@ -148,7 +146,6 @@ const addEmp = () => {
     });
 };
 
-//viewing department will make a connection query and show results from db
 const viewDepts = () => {
   console.log("Pulling up department info...\n");
   connection.query("SELECT * FROM departments", (err, res) => {
@@ -157,9 +154,7 @@ const viewDepts = () => {
     employeeOpt();
   });
 };
-//do the console table
 
-//viewing employees will make a connection query and show results from db
 const viewEmps = () => {
   console.log("Pulling up employees...\n");
   connection.query("SELECT * FROM employees", (err, res) => {
@@ -169,7 +164,6 @@ const viewEmps = () => {
   });
 };
 
-//viewing roles will make a connection query and show results from db
 const viewRoles = () => {
   console.log("Pulling up roles...\n");
   connection.query("SELECT * FROM roles", (err, res) => {
@@ -179,7 +173,6 @@ const viewRoles = () => {
   });
 };
 
-/////////////////
 const exit = () => {
   process.exit();
 };
