@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 const employeeOpt = () => {
   inquirer
     .prompt({
-      name: "A-Team",
+      name: "aTeam",
       type: "list",
       choices: [
         "Add Department",
@@ -27,8 +27,8 @@ const employeeOpt = () => {
     })
 
     .then((answer) => {
-      switch (answer.listoption) {
-        case "Add Department":
+      switch (answer.aTeam) {
+        case "add department":
           return addDept();
         case "add role":
           return addRole();
@@ -46,11 +46,11 @@ const employeeOpt = () => {
     });
 };
 
-//will prompt question, the answer make a connection query and insert it into db
+//question asked then connected through query to insert to db
 const addDept = () => {
   inquirer
     .prompt({
-      name: "newDept",
+      name: "addDept",
       type: "input",
       message: "Enter a new department",
     })
